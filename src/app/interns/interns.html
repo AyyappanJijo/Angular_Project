@@ -1,0 +1,78 @@
+<div class="page-wrapper">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Add New Intern</h2>
+      <p>Fill the details to register a new intern</p>
+    </div>
+
+    <form #internForm="ngForm" (ngSubmit)="onSubmit()" class="intern-form">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Intern ID</label>
+          <input type="text" name="internId" ngModel required />
+        </div>
+
+        <div class="form-group">
+          <label>Intern Name</label>
+          <input type="text" name="internName" ngModel required />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" ngModel required />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" name="phoneNumber" ngModel required />
+        </div>
+
+        <div class="form-group">
+          <label>College</label>
+          <input type="text" name="college" ngModel required />
+        </div>
+
+        <div class="form-group">
+          <label>Domain</label>
+          <select name="domain" ngModel required>
+            <option value="">Select Domain</option>
+            <option>Frontend</option>
+            <option>Backend</option>
+            <option>Full Stack</option>
+            <option>Data Analyst</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Internship Start Date</label>
+          <input type="date" name="internshipStartDate" ngModel required />
+        </div>
+
+        <div class="form-group">
+          <label>Internship End Date</label>
+          <input type="date" name="internshipEndDate" ngModel required />
+        </div>
+
+        <div class="form-group full-width">
+          <label>Status</label>
+          <select name="status" ngModel required>
+            <option value="">Select Status</option>
+            <option>Active</option>
+            <option>Completed</option>
+            <option>On Hold</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="button-section">
+        <button type="submit" class="submit-btn">
+          Add Intern
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

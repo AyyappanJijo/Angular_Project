@@ -1,0 +1,134 @@
+<div class="task-container">
+
+  <div class="header">
+    <h2>Task Management</h2>
+    <button class="add-btn" (click)="openModal()">+ Add Task</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Mentor</th>
+        <th>Intern</th>
+        <th>Created</th>
+        <th>Deadline</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.taskName }}</td>
+        <td>{{ task.mentorName }}</td>
+        <td>{{ task.internName }}</td>
+        <td>{{ task.createdDate }}</td>
+
+        <!-- Deadline Highlight -->
+        <td [ngClass]="{'overdue': task.status !== 'COMPLETED' && (task.deadline < today)}">
+          {{ task.deadline }}
+        </td>
+
+        <td>
+          <span class="status-badge"
+                [ngClass]="task.status.toLowerCase()">
+            {{ task.status }}
+          </span>
+        </td>
+
+        <td>
+          <button class="delete-btn"
+                  (click)="deleteTask(task.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3>Create Task</h3>
+      <span class="close-btn" (click)="closeModal()">×</span>
+    </div>
+
+    <form (ngSubmit)="saveTask()" class="task-form">
+
+      <!-- Task Name -->
+      <label for="taskName">Task Name</label>
+      <input
+        id="taskName"
+        type="text"
+        [(ngModel)]="task.taskName"
+        name="taskName"
+        required
+      />
+
+      <!-- Description -->
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        [(ngModel)]="task.description"
+        name="description"
+      ></textarea>
+
+      <!-- Mentor -->
+      <label for="mentorName">Mentor Name</label>
+      <input
+        id="mentorName"
+        type="text"
+        [(ngModel)]="task.mentorName"
+        name="mentorName"
+        required
+      />
+
+      <!-- Intern -->
+      <label for="internName">Intern Name</label>
+      <input
+        id="internName"
+        type="text"
+        [(ngModel)]="task.internName"
+        name="internName"
+        required
+      />
+
+      <!-- Deadline -->
+      <label for="deadline">Deadline</label>
+      <input
+        id="deadline"
+        type="date"
+        [(ngModel)]="task.deadline"
+        name="deadline"
+        required
+      />
+
+      <!-- Status -->
+      <label for="status">Status</label>
+      <select
+        id="status"
+        [(ngModel)]="task.status"
+        name="status"
+      >
+        <option value="PENDING">PENDING</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="COMPLETED">COMPLETED</option>
+      </select>
+
+      <div class="btn-group">
+        <button type="button" class="cancel-btn" (click)="closeModal()">
+          Cancel
+        </button>
+        <button type="submit" class="save-btn">
+          Save Task
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
